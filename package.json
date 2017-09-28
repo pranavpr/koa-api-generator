@@ -1,6 +1,6 @@
 {
   "name": "koa-api-generator",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Koa API generator",
   "main": "./bin/koa-api.js",
   "preferGlobal": true,

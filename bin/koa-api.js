@@ -213,6 +213,11 @@ function createApplication(name, path) {
       fs.readFileSync(__dirname + "/../template/env.example", "utf-8")
     );
 
+    write(
+      path + "/.editorconfig",
+      fs.readFileSync(__dirname + "/../template/editorconfig", "utf-8")
+    );
+
     complete();
   });
 }
