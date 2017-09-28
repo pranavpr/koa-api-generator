@@ -1,9 +1,8 @@
 # Rest API Generator for Koa2
 
-[![NPM Version][npm-image]][npm-url]
-[![NPM Downloads][downloads-image]][downloads-url]
-[![dependency Status](https://david-dm.org/pranavpr/koa-api-generator.svg)](https://david-dm.org/pranavpr/koa-api-generator)
-[![devDependency Status](https://david-dm.org/pranavpr/koa-api-generator/dev-status.svg)](https://david-dm.org/pranavpr/koa-api-generator?type=dev)
+[![NPM Version](https://img.shields.io/npm/v/koa-api-generator.svg?maxAge=43200)](https://www.npmjs.com/package/koa-api-generator)
+[![NPM Downloads](https://img.shields.io/npm/dt/koa-api-generator.svg?maxAge=43200)](https://www.npmjs.com/package/koa-api-generator)
+[![Dependency Status](https://david-dm.org/pranavpr/koa-api-generator.svg?maxAge=43200)](https://david-dm.org/pranavpr/koa-api-generator)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 
