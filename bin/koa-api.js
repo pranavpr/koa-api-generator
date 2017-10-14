@@ -1,17 +1,16 @@
 #!/usr/bin/env node
 
-var fs = require("fs");
-var mkdirp = require("mkdirp");
-var path = require("path");
-var program = require("commander");
-var readline = require("readline");
-var sortedObject = require("sorted-object");
+var fs = require('fs');
+var mkdirp = require('mkdirp');
+var path = require('path');
+var program = require('commander');
+var readline = require('readline');
 
-var MODE_0666 = parseInt("0666", 8);
-var MODE_0755 = parseInt("0755", 8);
+var MODE_0666 = parseInt('0666', 8);
+var MODE_0755 = parseInt('0755', 8);
 
 var _exit = process.exit;
-var pkg = require("../package.json");
+var pkg = require('../package.json');
 
 var version = pkg.version;
 
@@ -51,11 +50,11 @@ function confirm(msg, callback) {
 }
 
 program
-  .name("koa-api")
-  .version(version, "    --version")
-  .usage("[options] [dir]")
-  .option("    --git", "add .gitignore")
-  .option("-f, --force", "force on non-empty directory")
+  .name('koa-api')
+  .version(version, '    --version')
+  .usage('[options] [dir]')
+  .option('    --git', 'add .gitignore')
+  .option('-f, --force', 'force on non-empty directory')
   .parse(process.argv);
 
 if (!exit.exited) {
@@ -73,149 +72,145 @@ function createApplication(name, path) {
   console.log();
   function complete() {
     if (--wait) return;
-    var prompt = launchedFromCmd() ? ">" : "$";
+    var prompt = launchedFromCmd() ? '>' : '$';
 
     console.log();
-    console.log("   install dependencies:");
-    console.log("     %s cd %s && npm install", prompt, path);
+    console.log('   install dependencies:');
+    console.log('     %s cd %s && npm install', prompt, path);
     console.log();
-    console.log("   run the app:");
+    console.log('   run the app:');
 
     if (launchedFromCmd()) {
-      console.log("     %s SET DEBUG=koa* & npm start", prompt, name);
+      console.log('     %s SET DEBUG=koa* & npm start', prompt, name);
     } else {
-      console.log("     %s DEBUG=%s:* npm start", prompt, name);
+      console.log('     %s DEBUG=%s:* npm start', prompt, name);
     }
 
     console.log();
   }
 
   // JavaScript
-  var app = loadTemplate("js/app.js");
-  var index = loadTemplate("js/index.js");
-  var routes = loadTemplate("js/routes.js");
-  var tests = loadTemplate("js/routes.test.js");
+  var app = loadTemplate('js/app.js');
+  var index = loadTemplate('js/index.js');
+  var routes = loadTemplate('js/routes.js');
+  var tests = loadTemplate('js/routes.test.js');
 
   mkdir(path, function() {
-    mkdir(path + "/src", function() {
-      write(path + "/src/index.js", index);
-      write(path + "/src/app.js", app);
-      write(path + "/src/routes.js", routes);
+    mkdir(path + '/src', function() {
+      write(path + '/src/index.js', index);
+      write(path + '/src/app.js', app);
+      write(path + '/src/routes.js', routes);
       complete();
     });
 
-    mkdir(path + "/test", function() {
-      write(path + "/test/routes.test.js", tests);
+    mkdir(path + '/test', function() {
+      write(path + '/test/routes.test.js', tests);
       complete();
     });
 
     // package.json
     var pkg = {
       name: name,
-      version: "1.0.0",
+      version: '1.0.0',
       private: true,
-      main: "dist/index.js",
+      main: 'dist/index.js',
       engines: {
-        node: "~8.5.0",
-        npm: ">=5.3.0"
+        node: '~8.5.0',
+        npm: '>=5.3.0'
       },
       scripts: {
-        prestart: "npm run -s build",
-        start: "node dist/index.js",
+        prestart: 'npm run -s build',
+        start: 'node dist/index.js',
         dev:
           'nodemon src/index.js --exec "node -r dotenv/config -r babel-register"',
-        clean: "rimraf dist",
-        build: "npm run clean && mkdir -p dist && babel src -s -D -d dist",
-        test: "jest",
-        lint: "esw -w src test"
+        clean: 'rimraf dist',
+        build: 'npm run clean && mkdir -p dist && babel src -s -D -d dist',
+        test: 'jest',
+        lint: 'esw -w src test'
       },
       dependencies: {
-        "babel-cli": "^6.26.0",
-        "babel-plugin-transform-object-rest-spread": "^6.26.0",
-        "babel-preset-env": "^1.6.0",
-        kcors: "^2.2.1",
-        koa: "^2.3.0",
-        "koa-bodyparser": "^4.2.0",
-        "koa-morgan": "^1.0.1",
-        "koa-router": "^7.2.1",
-        rimraf: "^2.6.2"
+        '@koa/cors': '2',
+        'babel-cli': '^6.26.0',
+        'babel-plugin-transform-object-rest-spread': '^6.26.0',
+        'babel-preset-env': '^1.6.0',
+        koa: '^2.3.0',
+        'koa-bodyparser': '^4.2.0',
+        'koa-morgan': '^1.0.1',
+        'koa-router': '^7.2.1',
+        rimraf: '^2.6.2'
       },
       devDependencies: {
-        "babel-eslint": "^8.0.0",
-        "babel-jest": "^21.0.2",
-        "babel-register": "^6.26.0",
-        dotenv: "^4.0.0",
-        eslint: "^4.7.2",
-        "eslint-plugin-import": "^2.7.0",
-        "eslint-plugin-jest": "^21.1.0",
-        "eslint-watch": "^3.1.2",
-        jest: "^21.1.0",
-        nodemon: "^1.12.1",
-        supertest: "^3.0.0"
+        'babel-eslint': '^8.0.0',
+        'babel-jest': '^21.0.2',
+        'babel-register': '^6.26.0',
+        dotenv: '^4.0.0',
+        eslint: '^4.7.2',
+        'eslint-plugin-import': '^2.7.0',
+        'eslint-plugin-jest': '^21.1.0',
+        'eslint-watch': '^3.1.2',
+        jest: '^21.1.0',
+        nodemon: '^1.12.1',
+        supertest: '^3.0.0'
       },
       babel: {
         presets: [
           [
-            "env",
+            'env',
             {
               targets: {
-                node: "current"
+                node: 'current'
               }
             }
           ]
         ],
-        plugins: ["transform-object-rest-spread"],
+        plugins: ['transform-object-rest-spread'],
         sourceMaps: true,
         retainLines: true
       },
       eslintConfig: {
-        parser: "babel-eslint",
-        plugins: ["import", "jest"],
+        parser: 'babel-eslint',
+        plugins: ['import', 'jest'],
         parserOptions: {
           ecmaVersion: 2017,
-          sourceType: "module"
+          sourceType: 'module'
         },
         env: {
           node: true,
           jest: true,
           es6: true
         },
-        extends: ["eslint:recommended"],
+        extends: ['eslint:recommended'],
         rules: {
-          "jest/no-focused-tests": 2,
-          "jest/no-identical-title": 2
+          'jest/no-focused-tests': 2,
+          'jest/no-identical-title': 2
         }
       },
       jest: {
-        testEnvironment: "node"
+        testEnvironment: 'node'
       },
       directories: {
-        test: "test"
+        test: 'test'
       }
     };
 
-    // sort dependencies like npm(1)
-    pkg.dependencies = sortedObject(pkg.dependencies);
-    pkg.devDependencies = sortedObject(pkg.devDependencies);
-
     // write files
-    write(path + "/package.json", JSON.stringify(pkg, null, 2));
+    write(path + '/package.json', JSON.stringify(pkg, null, 2));
 
     if (program.git) {
       write(
-        path + "/.gitignore",
-        fs.readFileSync(__dirname + "/../template/gitignore", "utf-8")
+        path + '/.gitignore',
+        fs.readFileSync(__dirname + '/../template/gitignore', 'utf-8')
       );
     }
 
     write(
-      path + "/.env.example",
-      fs.readFileSync(__dirname + "/../template/env.example", "utf-8")
+      path + '/.env.example',
+      fs.readFileSync(__dirname + '/../template/env.example', 'utf-8')
     );
 
     write(
-      path + "/.editorconfig",
-      fs.readFileSync(__dirname + "/../template/editorconfig", "utf-8")
+      path + '/.editorconfig',
+      fs.readFileSync(__dirname + '/../template/editorconfig', 'utf-8')
     );
 
     complete();
@@ -231,8 +226,8 @@ function createApplication(name, path) {
 function createAppName(pathName) {
   return path
     .basename(pathName)
-    .replace(/[^A-Za-z0-9.()!~*'-]+/g, "-")
-    .replace(/^[-_.]+|-+$/g, "")
+    .replace(/[^A-Za-z0-9.()!~*'-]+/g, '-')
+    .replace(/^[-_.]+|-+$/g, '')
     .toLowerCase();
 }
 
@@ -245,7 +240,7 @@ function createAppName(pathName) {
 
 function emptyDirectory(path, fn) {
   fs.readdir(path, function(err, files) {
-    if (err && "ENOENT" != err.code) throw err;
+    if (err && 'ENOENT' != err.code) throw err;
     fn(!files || !files.length);
   });
 }
@@ -270,7 +265,7 @@ function exit(code) {
   streams.forEach(function(stream) {
     // submit empty write request and wait for completion
     draining += 1;
-    stream.write("", done);
+    stream.write('', done);
   });
 
   done();
@@ -281,7 +276,7 @@ function exit(code) {
  */
 
 function launchedFromCmd() {
-  return process.platform === "win32" && process.env._ === undefined;
+  return process.platform === 'win32' && process.env._ === undefined;
 }
 
 /**
@@ -289,7 +284,7 @@ function launchedFromCmd() {
  */
 
 function loadTemplate(name) {
-  return fs.readFileSync(path.join(__dirname, "..", "template", name), "utf-8");
+  return fs.readFileSync(path.join(__dirname, '..', 'template', name), 'utf-8');
 }
 
 /**
@@ -298,22 +293,22 @@ function loadTemplate(name) {
 
 function main() {
   // Path
-  var destinationPath = program.args.shift() || ".";
+  var destinationPath = program.args.shift() || '.';
 
   // App name
-  var appName = createAppName(path.resolve(destinationPath)) || "koa-api";
+  var appName = createAppName(path.resolve(destinationPath)) || 'koa-api';
 
   // Generate application
   emptyDirectory(destinationPath, function(empty) {
     if (empty || program.force) {
       createApplication(appName, destinationPath);
     } else {
-      confirm("destination is not empty, continue? [y/N] ", function(ok) {
+      confirm('destination is not empty, continue? [y/N] ', function(ok) {
         if (ok) {
           process.stdin.destroy();
           createApplication(appName, destinationPath);
         } else {
-          console.error("aborting");
+          console.error('aborting');
           exit(1);
         }
       });
@@ -331,7 +326,7 @@ function main() {
 function mkdir(path, fn) {
   mkdirp(path, MODE_0755, function(err) {
     if (err) throw err;
-    console.log("   \x1b[36mcreate\x1b[0m : " + path);
+    console.log('   \x1b[36mcreate\x1b[0m : ' + path);
     fn && fn();
   });
 }
@@ -345,5 +340,5 @@ function mkdir(path, fn) {
 
 function write(path, str, mode) {
   fs.writeFileSync(path, str, { mode: mode || MODE_0666 });
-  console.log("   \x1b[36mcreate\x1b[0m : " + path);
+  console.log('   \x1b[36mcreate\x1b[0m : ' + path);
 }

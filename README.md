@@ -45,7 +45,7 @@ _If you don't use [Yarn](https://yarnpkg.com/) you can just replace `yarn` with 
 Then you can begin development:
 
 ```sh
-yarn dev
+yarn run dev
 ```
 
 This will launch a [nodemon](https://nodemon.io/) process for automatic server restarts when your code changes.

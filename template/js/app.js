@@ -1,24 +1,24 @@
-import Koa from "koa";
-import cors from "kcors";
-import logger from "koa-morgan";
-import bodyParser from "koa-bodyparser";
-import router from "./routes";
+import Koa from 'koa';
+import cors from '@koa/cors';
+import logger from 'koa-morgan';
+import bodyParser from 'koa-bodyparser';
+import router from './routes';
 
 const app = new Koa();
 
 // Set middlewares
 app.use(
   bodyParser({
-    enableTypes: ["json", "form"],
-    formLimit: "10mb",
-    jsonLimit: "10mb"
+    enableTypes: ['json', 'form'],
+    formLimit: '10mb',
+    jsonLimit: '10mb'
   })
 );
 
 // Logger
 app.use(
-  logger("dev", {
-    skip: () => app.env === "test"
+  logger('dev', {
+    skip: () => app.env === 'test'
   })
 );
 
@@ -38,7 +38,7 @@ app.use(async (ctx, next) => {
       statusCode: ctx.status,
       message: err.message
     };
-    ctx.app.emit("error", err, ctx);
+    ctx.app.emit('error', err, ctx);
   }
 });
 
