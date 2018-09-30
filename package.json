@@ -1,6 +1,6 @@
 {
   "name": "koa-api-generator",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "Koa API generator",
   "main": "./bin/koa-api.js",
   "preferGlobal": true,
@@ -14,7 +14,14 @@
     "type": "git",
     "url": "git+ssh://git@github.com/pranavpr/koa-api-generator.git"
   },
-  "keywords": ["koa", "koa2", "api", "generator", "boilerplate", "jest"],
+  "keywords": [
+    "koa",
+    "koa2",
+    "api",
+    "generator",
+    "boilerplate",
+    "jest"
+  ],
   "author": "Pranav Prakash <pranav@pranavprakash.net>",
   "license": "MIT",
   "bugs": {

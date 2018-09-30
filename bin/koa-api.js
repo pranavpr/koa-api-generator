@@ -150,14 +150,14 @@ function createApplication(name, path) {
       private: true,
       main: 'dist/index.js',
       engines: {
-        node: '~8.5.0',
-        npm: '>=5.3.0'
+        node: '~8.12.0',
+        npm: '>=6.4.1'
       },
       scripts: {
         prestart: 'npm run -s build',
         start: 'node dist/index.js',
         dev:
-          'nodemon src/index.js --exec "node -r dotenv/config -r babel-register"',
+          'nodemon src/index.js --exec "node -r dotenv/config -r @babel/register"',
         clean: 'rimraf dist',
         build: 'npm run clean && mkdir -p dist && babel src -s -D -d dist',
         test: 'jest',
@@ -165,32 +165,34 @@ function createApplication(name, path) {
       },
       dependencies: {
         '@koa/cors': '2',
-        'babel-cli': '^6.26.0',
-        'babel-plugin-transform-object-rest-spread': '^6.26.0',
-        'babel-preset-env': '^1.6.0',
-        koa: '^2.3.0',
-        'koa-bodyparser': '^4.2.0',
+        '@babel/cli': '^7.1.0',
+        '@babel/core': '^7.1.0',
+        '@babel/plugin-proposal-object-rest-spread': '^7.0.0',
+        '@babel/preset-env': '^7.1.0',
+        koa: '^2.5.3',
+        'koa-bodyparser': '^4.2.1',
         'koa-morgan': '^1.0.1',
-        'koa-router': '^7.2.1',
+        'koa-router': '^7.4.0',
         rimraf: '^2.6.2'
       },
       devDependencies: {
-        'babel-eslint': '^8.0.0',
-        'babel-jest': '^21.0.2',
-        'babel-register': '^6.26.0',
-        dotenv: '^4.0.0',
-        eslint: '^4.7.2',
-        'eslint-plugin-import': '^2.7.0',
-        'eslint-plugin-jest': '^21.1.0',
-        'eslint-watch': '^3.1.2',
-        jest: '^21.1.0',
-        nodemon: '^1.12.1',
-        supertest: '^3.0.0'
+        'babel-eslint': '^10.0.1',
+        'babel-jest': '^23.6.0',
+        '@babel/register': '^7.0.0',
+        'babel-core': '7.0.0-bridge.0',
+        dotenv: '^6.0.0',
+        eslint: '^5.6.1',
+        'eslint-plugin-import': '^2.14.0',
+        'eslint-plugin-jest': '^21.23.0',
+        'eslint-watch': '^4.0.2',
+        jest: '^23.6.0',
+        nodemon: '^1.18.4',
+        supertest: '^3.3.0'
       },
       babel: {
         presets: [
           [
-            'env',
+            '@babel/preset-env',
             {
               targets: {
                 node: 'current'
@@ -198,7 +200,7 @@ function createApplication(name, path) {
             }
           ]
         ],
-        plugins: ['transform-object-rest-spread'],
+        plugins: ['@babel/plugin-proposal-object-rest-spread'],
         sourceMaps: true,
         retainLines: true
       },
